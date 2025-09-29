@@ -56,7 +56,7 @@ export default function Contact() {
                 <span className="text-gray-400"> Touch</span>
               </h1>
               <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                Have questions about mnemonic.fyi? We'd love to hear from you.
+                Have questions about mnemonic.fyi? We&apos;d love to hear from you.
               </p>
             </div>
 

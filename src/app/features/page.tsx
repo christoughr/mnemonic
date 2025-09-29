@@ -44,7 +44,7 @@ export default function Features() {
                 <span className="text-gray-400"> & Capabilities</span>
               </h1>
               <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-                Discover how mnemonic.fyi transforms your team's knowledge into actionable insights
+                Discover how mnemonic.fyi transforms your team&apos;s knowledge into actionable insights
               </p>
             </div>
 
@@ -60,7 +60,7 @@ export default function Features() {
                 <h3 className="text-xl font-semibold mb-4 text-blue-400">Smart Search</h3>
                 <p className="text-gray-300 leading-relaxed">
                   AI-powered semantic search that understands context and intent, not just keywords. 
-                  Find exactly what you're looking for across all your knowledge sources.
+                  Find exactly what you&apos;re looking for across all your knowledge sources.
                 </p>
               </div>
 
@@ -115,7 +115,7 @@ export default function Features() {
                 </div>
                 <h3 className="text-xl font-semibold mb-4 text-pink-400">Notion Integration</h3>
                 <p className="text-gray-300 leading-relaxed">
-                  Index all your Notion pages, databases, and documentation. Turn your team's 
+                  Index all your Notion pages, databases, and documentation. Turn your team&apos;s 
                   knowledge base into a searchable, AI-powered resource.
                 </p>
               </div>
@@ -137,7 +137,7 @@ export default function Features() {
 
             {/* CTA Section */}
             <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 max-w-2xl mx-auto">
-              <h2 className="text-3xl font-bold mb-4 text-white">Ready to Transform Your Team's Knowledge?</h2>
+              <h2 className="text-3xl font-bold mb-4 text-white">Ready to Transform Your Team&apos;s Knowledge?</h2>
               <p className="text-gray-300 mb-8">
                 Experience the power of AI-driven knowledge search. Get started with a free demo today.
               </p>

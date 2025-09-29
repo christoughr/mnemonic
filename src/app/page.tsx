@@ -73,7 +73,7 @@ export default function Home() {
 
             {/* Tagline */}
             <p className="text-xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Transform your team's scattered knowledge into intelligent answers. 
+              Transform your team&apos;s scattered knowledge into intelligent answers. 
               Search across Slack and Notion with AI-powered insights that actually understand context.
             </p>
 

@@ -69,17 +69,17 @@ export default function About() {
               <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800">
                 <h2 className="text-2xl font-semibold mb-6 text-blue-400">Our Story</h2>
                 <p className="text-gray-300 leading-relaxed mb-6">
-                  In today's fast-paced work environment, teams are drowning in information scattered across 
+                  In today&apos;s fast-paced work environment, teams are drowning in information scattered across 
                   Slack channels, Notion pages, and countless other tools. We built mnemonic.fyi to solve 
                   this exact problem.
                 </p>
                 <p className="text-gray-300 leading-relaxed mb-6">
-                  Our AI-powered platform transforms your team's scattered knowledge into intelligent, 
+                  Our AI-powered platform transforms your team&apos;s scattered knowledge into intelligent, 
                   searchable insights. No more hunting through endless threads or documents – just ask 
                   a question and get the answer you need, instantly.
                 </p>
                 <p className="text-gray-300 leading-relaxed">
-                  We believe that every team deserves access to their collective wisdom, and we're making 
+                  We believe that every team deserves access to their collective wisdom, and we&apos;re making 
                   that vision a reality through cutting-edge AI and thoughtful design.
                 </p>
               </div>
