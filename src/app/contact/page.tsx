@@ -124,7 +124,7 @@ export default function Contact() {
                       </div>
                       <div>
                         <h3 className="font-semibold text-white text-sm sm:text-base group-hover/item:text-blue-300 transition-colors duration-300">Email</h3>
-                        <p className="text-gray-400 text-sm sm:text-base group-hover/item:text-gray-300 transition-colors duration-300">hello@mnemonic.fyi</p>
+                        <p className="text-gray-400 text-sm sm:text-base group-hover/item:text-gray-300 transition-colors duration-300">support@mnemonic.fyi</p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-4">
@@ -136,7 +136,7 @@ export default function Contact() {
                       </div>
                       <div>
                         <h3 className="font-semibold text-white">Location</h3>
-                        <p className="text-gray-400">San Francisco, CA</p>
+                        <p className="text-gray-400">Seoul, South Korea</p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-4">
