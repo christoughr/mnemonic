@@ -134,12 +134,12 @@ export function AdminPanel() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Select Channel
+              Channel (Select or Enter Manually)
             </label>
             <select
               value={selectedChannel}
               onChange={(e) => setSelectedChannel(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-2"
             >
               <option value="">Select a channel...</option>
               {slackChannels.map((channel) => (
@@ -148,6 +148,16 @@ export function AdminPanel() {
                 </option>
               ))}
             </select>
+            <input
+              type="text"
+              placeholder="Or enter channel ID manually (e.g., C1234567890)"
+              value={selectedChannel}
+              onChange={(e) => setSelectedChannel(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              If channel list is empty, enter a channel ID manually (starts with C)
+            </p>
           </div>
 
           <button

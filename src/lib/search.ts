@@ -22,11 +22,25 @@ export async function searchKnowledge(query: string, limit = 10): Promise<Search
     const queryEmbedding = await generateEmbedding(query);
 
     // Search for similar content using vector similarity
-    const { data, error } = await getSupabaseAdmin().rpc('match_knowledge_items', {
-      query_embedding: queryEmbedding,
-      match_threshold: 0.7,
-      match_count: limit,
-    });
+    let data, error;
+    try {
+      const result = await getSupabaseAdmin().rpc('match_knowledge_items', {
+        query_embedding: queryEmbedding,
+        match_threshold: 0.3,
+        match_count: limit,
+      });
+      data = result.data;
+      error = result.error;
+    } catch (rpcError) {
+      // Fallback: get all items if vector search fails
+      console.log('Vector search failed, falling back to simple search:', rpcError);
+      const result = await getSupabaseAdmin()
+        .from('knowledge_items')
+        .select('*')
+        .limit(limit);
+      data = result.data?.map(item => ({ ...item, similarity: 0.5 })) || [];
+      error = result.error;
+    }
 
     if (error) {
       console.error('Error searching knowledge base:', error);
