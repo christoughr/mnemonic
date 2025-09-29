@@ -12,9 +12,9 @@ export default function Home() {
 
   if (!showApp) {
     return (
-      <div className="min-h-screen bg-black text-white overflow-hidden">
+      <div className="min-h-screen bg-black text-white">
         {/* Hero Section */}
-        <div className="relative min-h-screen flex items-center justify-center">
+        <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
           {/* Enhanced Background gradient with animation */}
           <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black animate-gradient"></div>
           
