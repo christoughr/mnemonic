@@ -1,0 +1,39 @@
+# Cursor AI Rules for mnemonic.fyi
+
+## Project Context
+This is mnemonic.fyi - an AI-powered knowledge search application that searches across Slack and Notion.
+
+## Tech Stack
+- Next.js 15 with App Router
+- OpenAI GPT-4 and embeddings
+- Supabase database with vector search
+- Slack and Notion API integrations
+- Tailwind CSS for styling
+- Deployed on Vercel
+
+## Key Files
+- `src/app/page.tsx` - Main landing page with demo toggle
+- `src/components/SearchInterface.tsx` - Search functionality
+- `src/components/AdminPanel.tsx` - Data ingestion panel
+- `src/lib/search.ts` - Core search logic with vector similarity
+- `src/lib/slack.ts` - Slack API integration
+- `src/lib/notion.ts` - Notion API integration
+
+## Current Issues
+- Slack API missing scopes (channels:read, users:read, chat:read)
+- Vercel deployment needs to be set up
+- Domain mnemonics-red.vercel.app not working
+
+## Development Commands
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run lint` - Lint code
+
+## Environment Variables
+All API keys are in .env.local (OpenAI, Supabase, Slack, Notion)
+
+## When helping with this project:
+1. Always check the current state of files before making changes
+2. Test changes locally with `npm run dev`
+3. Commit changes to Git when working
+4. Focus on fixing deployment and Slack integration issues
