@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 export default function Contact() {
   const [showApp, setShowApp] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -47,23 +48,64 @@ export default function Contact() {
             </div>
             {/* Mobile menu button */}
             <div className="sm:hidden">
-              <button className="text-gray-400 hover:text-white transition-colors duration-300">
+              <button 
+                onClick={() => setShowMobileMenu(!showMobileMenu)}
+                className="text-gray-400 hover:text-white transition-colors duration-300 p-2"
+              >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               </button>
             </div>
           </div>
+
+          {/* Mobile menu dropdown */}
+          {showMobileMenu && (
+            <div className="absolute top-16 left-4 right-4 bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 z-30 sm:hidden">
+              <div className="p-4 space-y-4">
+                <Link 
+                  href="/" 
+                  className="block text-gray-400 hover:text-white transition-colors duration-300 py-2"
+                  onClick={() => setShowMobileMenu(false)}
+                >
+                  Home
+                </Link>
+                <Link 
+                  href="/about" 
+                  className="block text-gray-400 hover:text-white transition-colors duration-300 py-2"
+                  onClick={() => setShowMobileMenu(false)}
+                >
+                  About
+                </Link>
+                <Link 
+                  href="/features" 
+                  className="block text-gray-400 hover:text-white transition-colors duration-300 py-2"
+                  onClick={() => setShowMobileMenu(false)}
+                >
+                  Features
+                </Link>
+                <button
+                  onClick={() => {
+                    setShowApp(true);
+                    setShowMobileMenu(false);
+                  }}
+                  className="w-full bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105"
+                >
+                  Try Demo
+                </button>
+              </div>
+            </div>
+          )}
           
           {/* Main content */}
           <div className="relative z-10 px-3 sm:px-6 max-w-4xl mx-auto w-full pb-20 sm:pb-0">
             {/* Header */}
-            <div className="text-center mb-8 sm:mb-10 lg:mb-12">
-              <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-2 sm:mb-3 lg:mb-4 animate-text-glow">
+            <div className="text-center mb-6 sm:mb-8 lg:mb-12">
+              <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-3 sm:mb-4 lg:mb-6 animate-text-glow">
                 <span className="text-white">Get in</span>
                 <span className="text-gray-400"> Touch</span>
               </h1>
-              <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed px-2">
+              <p className="text-sm sm:text-base lg:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed px-4">
                 Have questions about mnemonic.fyi? We&apos;d love to hear from you.
               </p>
             </div>
@@ -71,18 +113,18 @@ export default function Contact() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-start">
               {/* Contact Info */}
               <div className="space-y-6 sm:space-y-8">
-                <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 lg:p-8 border border-gray-800">
-                  <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-4 sm:mb-5 lg:mb-6 text-blue-400">Contact Information</h2>
+                <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 lg:p-8 border border-gray-800 hover:border-blue-500 transition-all duration-300 group hover:scale-105">
+                  <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-4 sm:mb-5 lg:mb-6 text-blue-400 group-hover:text-blue-300 transition-colors duration-300">Contact Information</h2>
                   <div className="space-y-4 sm:space-y-6">
-                    <div className="flex items-center space-x-3 sm:space-x-4">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 rounded-xl flex items-center justify-center">
-                        <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="flex items-center space-x-3 sm:space-x-4 group/item hover:scale-105 transition-all duration-300">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 rounded-xl flex items-center justify-center group-hover/item:bg-blue-500 transition-colors duration-300 group-hover/item:scale-110">
+                        <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover/item:animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
                       </div>
                       <div>
-                        <h3 className="font-semibold text-white text-sm sm:text-base">Email</h3>
-                        <p className="text-gray-400 text-sm sm:text-base">hello@mnemonic.fyi</p>
+                        <h3 className="font-semibold text-white text-sm sm:text-base group-hover/item:text-blue-300 transition-colors duration-300">Email</h3>
+                        <p className="text-gray-400 text-sm sm:text-base group-hover/item:text-gray-300 transition-colors duration-300">hello@mnemonic.fyi</p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-4">

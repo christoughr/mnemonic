@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 export default function Features() {
   const [showApp, setShowApp] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   if (!showApp) {
     return (
@@ -35,23 +36,64 @@ export default function Features() {
             </div>
             {/* Mobile menu button */}
             <div className="sm:hidden">
-              <button className="text-gray-400 hover:text-white transition-colors duration-300">
+              <button 
+                onClick={() => setShowMobileMenu(!showMobileMenu)}
+                className="text-gray-400 hover:text-white transition-colors duration-300 p-2"
+              >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               </button>
             </div>
           </div>
+
+          {/* Mobile menu dropdown */}
+          {showMobileMenu && (
+            <div className="absolute top-16 left-4 right-4 bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 z-30 sm:hidden">
+              <div className="p-4 space-y-4">
+                <Link 
+                  href="/" 
+                  className="block text-gray-400 hover:text-white transition-colors duration-300 py-2"
+                  onClick={() => setShowMobileMenu(false)}
+                >
+                  Home
+                </Link>
+                <Link 
+                  href="/about" 
+                  className="block text-gray-400 hover:text-white transition-colors duration-300 py-2"
+                  onClick={() => setShowMobileMenu(false)}
+                >
+                  About
+                </Link>
+                <Link 
+                  href="/contact" 
+                  className="block text-gray-400 hover:text-white transition-colors duration-300 py-2"
+                  onClick={() => setShowMobileMenu(false)}
+                >
+                  Contact
+                </Link>
+                <button
+                  onClick={() => {
+                    setShowApp(true);
+                    setShowMobileMenu(false);
+                  }}
+                  className="w-full bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105"
+                >
+                  Try Demo
+                </button>
+              </div>
+            </div>
+          )}
           
           {/* Main content */}
           <div className="relative z-10 text-center px-3 sm:px-6 max-w-6xl mx-auto pb-20 sm:pb-0">
             {/* Header */}
-            <div className="mb-8 sm:mb-12 lg:mb-16">
-              <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-2 sm:mb-3 lg:mb-4 animate-text-glow">
+            <div className="mb-6 sm:mb-8 lg:mb-12">
+              <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-3 sm:mb-4 lg:mb-6 animate-text-glow">
                 <span className="text-white">Features</span>
                 <span className="text-gray-400"> & Capabilities</span>
               </h1>
-              <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed px-2">
+              <p className="text-sm sm:text-base lg:text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed px-4">
                 Discover how mnemonic.fyi transforms your team&apos;s knowledge into actionable insights
               </p>
             </div>
@@ -59,28 +101,28 @@ export default function Features() {
             {/* Core Features Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-16">
               {/* Smart Search */}
-              <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 lg:p-8 border border-gray-800 hover:border-blue-500 transition-all duration-300 group hover:scale-105">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-blue-600 rounded-2xl mx-auto mb-3 sm:mb-4 lg:mb-6 flex items-center justify-center group-hover:bg-blue-500 transition-colors duration-300">
-                  <svg className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 lg:p-8 border border-gray-800 hover:border-blue-500 transition-all duration-300 group hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-blue-600 rounded-2xl mx-auto mb-3 sm:mb-4 lg:mb-6 flex items-center justify-center group-hover:bg-blue-500 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                  <svg className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white group-hover:animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                 </div>
-                <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 sm:mb-3 lg:mb-4 text-blue-400">Smart Search</h3>
-                <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
+                <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 sm:mb-3 lg:mb-4 text-blue-400 group-hover:text-blue-300 transition-colors duration-300">Smart Search</h3>
+                <p className="text-gray-300 leading-relaxed text-sm sm:text-base group-hover:text-gray-200 transition-colors duration-300">
                   AI-powered semantic search that understands context and intent, not just keywords. 
                   Find exactly what you&apos;re looking for across all your knowledge sources.
                 </p>
               </div>
 
               {/* Instant Answers */}
-              <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 lg:p-8 border border-gray-800 hover:border-yellow-500 transition-all duration-300 group hover:scale-105">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-yellow-600 rounded-2xl mx-auto mb-3 sm:mb-4 lg:mb-6 flex items-center justify-center group-hover:bg-yellow-500 transition-colors duration-300">
-                  <svg className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 lg:p-8 border border-gray-800 hover:border-yellow-500 transition-all duration-300 group hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/20">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-yellow-600 rounded-2xl mx-auto mb-3 sm:mb-4 lg:mb-6 flex items-center justify-center group-hover:bg-yellow-500 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                  <svg className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white group-hover:animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
-                <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 sm:mb-3 lg:mb-4 text-yellow-400">Instant Answers</h3>
-                <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
+                <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 sm:mb-3 lg:mb-4 text-yellow-400 group-hover:text-yellow-300 transition-colors duration-300">Instant Answers</h3>
+                <p className="text-gray-300 leading-relaxed text-sm sm:text-base group-hover:text-gray-200 transition-colors duration-300">
                   Get summarized, contextual answers instead of raw search results. Our AI analyzes 
                   and synthesizes information to give you exactly what you need to know.
                 </p>
