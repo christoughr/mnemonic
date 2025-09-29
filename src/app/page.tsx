@@ -154,43 +154,43 @@ export default function Home() {
     <div className="min-h-screen bg-gray-50">
       {/* App Header */}
       <div className="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-3 sm:py-4">
+        <div className="w-full px-4 py-2 sm:py-3 lg:py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2 sm:space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-3 lg:space-x-4">
               <button
                 onClick={() => setShowApp(false)}
-                className="text-gray-600 hover:text-gray-900 transition-colors text-sm sm:text-base"
+                className="text-gray-600 hover:text-gray-900 transition-colors text-xs sm:text-sm lg:text-base"
               >
                 ← Back
               </button>
-              <div className="h-4 sm:h-6 w-px bg-gray-300"></div>
-              <div className="flex items-center space-x-2">
-                <div className="w-6 h-6 sm:w-8 sm:h-8 bg-black rounded-full flex items-center justify-center">
-                  <div className="w-3 h-3 sm:w-4 sm:h-4 bg-white rounded-full"></div>
+              <div className="h-3 sm:h-4 lg:h-6 w-px bg-gray-300"></div>
+              <div className="flex items-center space-x-1 sm:space-x-2">
+                <div className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 bg-black rounded-full flex items-center justify-center">
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 bg-white rounded-full"></div>
                 </div>
-                <span className="font-semibold text-gray-900 text-sm sm:text-base">mnemonic.fyi</span>
+                <span className="font-semibold text-gray-900 text-xs sm:text-sm lg:text-base">mnemonic.fyi</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-6 sm:py-8">
-        <div className="text-center mb-6 sm:mb-8">
-          <h1 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
+      <div className="w-full px-4 py-4 sm:py-6 lg:py-8">
+        <div className="text-center mb-4 sm:mb-6 lg:mb-8">
+          <h1 className="text-xl sm:text-2xl lg:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 lg:mb-4">
             AI Knowledge Search
           </h1>
-          <p className="text-base sm:text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base lg:text-xl text-gray-600 max-w-2xl mx-auto px-2">
             Search across your Slack and Notion with AI-powered answers
           </p>
         </div>
 
-        <div className="flex justify-center mb-6 sm:mb-8">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-1 w-full max-w-md">
+        <div className="flex justify-center mb-4 sm:mb-6 lg:mb-8">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-1 w-full max-w-sm sm:max-w-md">
             <div className="grid grid-cols-3 gap-1">
               <button
                 onClick={() => setActiveTab('search')}
-                className={`px-3 sm:px-6 py-2 rounded-md font-medium transition-colors text-sm sm:text-base ${
+                className={`px-2 sm:px-3 lg:px-6 py-2 rounded-md font-medium transition-colors text-xs sm:text-sm lg:text-base ${
                   activeTab === 'search'
                     ? 'bg-blue-600 text-white'
                     : 'text-gray-600 hover:text-gray-900'
@@ -200,7 +200,7 @@ export default function Home() {
               </button>
               <button
                 onClick={() => setActiveTab('admin')}
-                className={`px-3 sm:px-6 py-2 rounded-md font-medium transition-colors text-sm sm:text-base ${
+                className={`px-2 sm:px-3 lg:px-6 py-2 rounded-md font-medium transition-colors text-xs sm:text-sm lg:text-base ${
                   activeTab === 'admin'
                     ? 'bg-blue-600 text-white'
                     : 'text-gray-600 hover:text-gray-900'
@@ -210,7 +210,7 @@ export default function Home() {
               </button>
               <button
                 onClick={() => setActiveTab('stats')}
-                className={`px-3 sm:px-6 py-2 rounded-md font-medium transition-colors text-sm sm:text-base ${
+                className={`px-2 sm:px-3 lg:px-6 py-2 rounded-md font-medium transition-colors text-xs sm:text-sm lg:text-base ${
                   activeTab === 'stats'
                     ? 'bg-blue-600 text-white'
                     : 'text-gray-600 hover:text-gray-900'
@@ -222,7 +222,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="w-full max-w-4xl mx-auto">
           {activeTab === 'search' && <SearchInterface />}
           {activeTab === 'admin' && <AdminPanel />}
           {activeTab === 'stats' && <StatsPanel />}
