@@ -42,10 +42,10 @@ export default function Home() {
           </div>
           
           {/* Main content */}
-          <div className="relative z-10 text-center px-4 sm:px-6 max-w-6xl mx-auto">
+          <div className="relative z-10 text-center px-3 sm:px-6 max-w-6xl mx-auto pb-20 sm:pb-0">
             {/* Logo */}
-            <div className="mb-8 sm:mb-12">
-              <div className="w-20 h-20 sm:w-32 sm:h-32 mx-auto mb-6 sm:mb-8 relative animate-float">
+            <div className="mb-6 sm:mb-8 lg:mb-12">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-32 lg:h-32 mx-auto mb-4 sm:mb-6 lg:mb-8 relative animate-float">
                 {/* Eye-inspired logo */}
                 <div className="w-full h-full border-2 sm:border-4 border-white rounded-full relative animate-pulse-glow">
                   {/* Outer ring with angular cuts */}
@@ -54,11 +54,11 @@ export default function Home() {
                   {/* Inner eye shape */}
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                     {/* Iris */}
-                    <div className="w-12 h-12 sm:w-20 sm:h-20 bg-white rounded-full relative overflow-hidden">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-20 lg:h-20 bg-white rounded-full relative overflow-hidden">
                       {/* Pupil */}
-                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-7 h-7 sm:w-12 sm:h-12 bg-black rounded-full"></div>
+                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 sm:w-7 sm:h-7 lg:w-12 lg:h-12 bg-black rounded-full"></div>
                       {/* Highlight */}
-                      <div className="absolute top-2 left-2 sm:top-3 sm:left-4 w-2 h-2 sm:w-4 sm:h-4 bg-white rounded-full opacity-80"></div>
+                      <div className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 lg:top-3 lg:left-4 w-1.5 h-1.5 sm:w-2 sm:h-2 lg:w-4 lg:h-4 bg-white rounded-full opacity-80"></div>
                     </div>
                   </div>
                   
@@ -69,18 +69,18 @@ export default function Home() {
             </div>
 
             {/* Brand */}
-            <div className="mb-6 sm:mb-8">
-              <h1 className="text-4xl sm:text-6xl font-bold mb-3 sm:mb-4">
+            <div className="mb-4 sm:mb-6 lg:mb-8">
+              <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-2 sm:mb-3 lg:mb-4">
                 <span className="text-white">mnemonic</span>
                 <span className="text-gray-400">.fyi</span>
               </h1>
-              <p className="text-lg sm:text-2xl text-gray-300 font-light">
+              <p className="text-base sm:text-lg lg:text-2xl text-gray-300 font-light">
                 AI Knowledge Search
               </p>
             </div>
 
             {/* Tagline */}
-            <p className="text-base sm:text-xl text-gray-400 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-2">
+            <p className="text-sm sm:text-base lg:text-xl text-gray-400 mb-6 sm:mb-8 lg:mb-12 max-w-3xl mx-auto leading-relaxed px-2">
               Transform your team&apos;s scattered knowledge into intelligent answers. 
               Search across Slack and Notion with AI-powered insights that actually understand context.
             </p>
@@ -88,40 +88,40 @@ export default function Home() {
             {/* CTA Button */}
             <button
               onClick={() => setShowApp(true)}
-              className="bg-white text-black px-8 sm:px-12 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-2xl"
+              className="bg-white text-black px-6 sm:px-8 lg:px-12 py-2.5 sm:py-3 lg:py-4 rounded-full text-sm sm:text-base lg:text-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-2xl mb-8 sm:mb-12 lg:mb-20"
             >
               Try Demo →
             </button>
 
             {/* Features */}
-            <div className="mt-12 sm:mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto px-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto px-2 sm:px-4">
               <div className="text-center group hover:scale-105 transition-all duration-300">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-800 rounded-2xl mx-auto mb-3 sm:mb-4 flex items-center justify-center group-hover:bg-blue-600 transition-all duration-300 group-hover:scale-110">
-                  <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-gray-800 rounded-2xl mx-auto mb-2 sm:mb-3 lg:mb-4 flex items-center justify-center group-hover:bg-blue-600 transition-all duration-300 group-hover:scale-110">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 text-white group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                 </div>
-                <h3 className="text-base sm:text-lg font-semibold mb-2 group-hover:text-blue-400 transition-colors duration-300">Smart Search</h3>
+                <h3 className="text-sm sm:text-base lg:text-lg font-semibold mb-1 sm:mb-2 group-hover:text-blue-400 transition-colors duration-300">Smart Search</h3>
                 <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">AI-powered semantic search across all your knowledge sources</p>
               </div>
               
               <div className="text-center group hover:scale-105 transition-all duration-300">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-800 rounded-2xl mx-auto mb-3 sm:mb-4 flex items-center justify-center group-hover:bg-yellow-600 transition-all duration-300 group-hover:scale-110">
-                  <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-gray-800 rounded-2xl mx-auto mb-2 sm:mb-3 lg:mb-4 flex items-center justify-center group-hover:bg-yellow-600 transition-all duration-300 group-hover:scale-110">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 text-white group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
-                <h3 className="text-base sm:text-lg font-semibold mb-2 group-hover:text-yellow-400 transition-colors duration-300">Instant Answers</h3>
+                <h3 className="text-sm sm:text-base lg:text-lg font-semibold mb-1 sm:mb-2 group-hover:text-yellow-400 transition-colors duration-300">Instant Answers</h3>
                 <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">Get summarized, contextual answers instead of raw search results</p>
               </div>
               
               <div className="text-center group hover:scale-105 transition-all duration-300 sm:col-span-2 lg:col-span-1">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-800 rounded-2xl mx-auto mb-3 sm:mb-4 flex items-center justify-center group-hover:bg-green-600 transition-all duration-300 group-hover:scale-110">
-                  <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-gray-800 rounded-2xl mx-auto mb-2 sm:mb-3 lg:mb-4 flex items-center justify-center group-hover:bg-green-600 transition-all duration-300 group-hover:scale-110">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 text-white group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
                 </div>
-                <h3 className="text-base sm:text-lg font-semibold mb-2 group-hover:text-green-400 transition-colors duration-300">Expert Finder</h3>
+                <h3 className="text-sm sm:text-base lg:text-lg font-semibold mb-1 sm:mb-2 group-hover:text-green-400 transition-colors duration-300">Expert Finder</h3>
                 <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">Identify team members with relevant expertise for any topic</p>
               </div>
             </div>
@@ -138,11 +138,11 @@ export default function Home() {
         </div>
 
         {/* Footer */}
-        <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 text-center px-4">
-          <p className="text-gray-500 text-xs sm:text-sm mb-2">
+        <div className="absolute bottom-2 sm:bottom-4 lg:bottom-8 left-1/2 transform -translate-x-1/2 text-center px-2 sm:px-4 w-full max-w-xs sm:max-w-none">
+          <p className="text-gray-500 text-xs sm:text-sm mb-1 sm:mb-2 leading-tight">
             Built with Next.js • Powered by OpenAI • Stored in Supabase
           </p>
-          <p className="text-gray-600 text-xs flex items-center justify-center gap-1">
+          <p className="text-gray-600 text-xs flex items-center justify-center gap-1 leading-tight">
             Made with <span className="text-red-500 animate-pulse">❤️</span> by the mnemonic.fyi team
           </p>
         </div>

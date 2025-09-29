@@ -131,6 +131,7 @@ body {
     overflow-x: hidden;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
+    min-height: 100vh;
   }
   
   /* Prevent horizontal scroll */
@@ -139,11 +140,30 @@ body {
     overflow-x: hidden;
   }
   
+  /* Ensure proper mobile scrolling */
+  .min-h-screen {
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+  }
+  
   /* Fix container issues */
   .container {
     max-width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+  
+  /* Ensure content fits on mobile */
+  .relative.min-h-screen {
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-y: auto;
+  }
+  
+  /* Fix text truncation */
+  .text-center {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   /* Reduce motion for better performance */
