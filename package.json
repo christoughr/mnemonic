@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "context": "node inject-context.js",
+    "setup": "./setup-context.sh"
   },
   "dependencies": {
     "@notionhq/client": "^5.1.0",
