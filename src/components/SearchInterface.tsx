@@ -64,13 +64,13 @@ export function SearchInterface() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Ask anything about your team's knowledge..."
-            className="w-full px-3 sm:px-4 py-2 sm:py-3 text-base sm:text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 pr-20 sm:pr-24 text-base sm:text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             disabled={isLoading}
           />
           <button
             type="submit"
             disabled={isLoading || !query.trim()}
-            className="absolute right-1 sm:right-2 top-1 sm:top-2 bottom-1 sm:bottom-2 px-3 sm:px-6 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm sm:text-base"
+            className="absolute right-1 sm:right-2 top-1 sm:top-2 bottom-1 sm:bottom-2 px-3 sm:px-4 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm sm:text-base min-w-[60px] sm:min-w-[80px]"
           >
             {isLoading ? 'Searching...' : 'Search'}
           </button>

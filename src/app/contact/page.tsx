@@ -27,14 +27,14 @@ export default function Contact() {
           <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black animate-gradient"></div>
           
           {/* Navigation */}
-          <div className="absolute top-8 left-8 right-8 flex justify-between items-center z-20">
+          <div className="absolute top-4 left-4 right-4 sm:top-8 sm:left-8 sm:right-8 flex justify-between items-center z-20">
             <Link href="/" className="flex items-center space-x-2 group">
-              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <div className="w-4 h-4 bg-black rounded-full"></div>
+              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <div className="w-3 h-3 sm:w-4 sm:h-4 bg-black rounded-full"></div>
               </div>
-              <span className="font-semibold text-white group-hover:text-gray-300 transition-colors duration-300">mnemonic.fyi</span>
+              <span className="font-semibold text-white group-hover:text-gray-300 transition-colors duration-300 text-sm sm:text-base">mnemonic.fyi</span>
             </Link>
-            <div className="flex space-x-6">
+            <div className="hidden sm:flex space-x-6">
               <Link href="/" className="text-gray-400 hover:text-white transition-colors duration-300">Home</Link>
               <Link href="/about" className="text-gray-400 hover:text-white transition-colors duration-300">About</Link>
               <Link href="/features" className="text-gray-400 hover:text-white transition-colors duration-300">Features</Link>
@@ -45,36 +45,44 @@ export default function Contact() {
                 Try Demo
               </button>
             </div>
+            {/* Mobile menu button */}
+            <div className="sm:hidden">
+              <button className="text-gray-400 hover:text-white transition-colors duration-300">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+            </div>
           </div>
           
           {/* Main content */}
-          <div className="relative z-10 px-6 max-w-4xl mx-auto w-full">
+          <div className="relative z-10 px-3 sm:px-6 max-w-4xl mx-auto w-full pb-20 sm:pb-0">
             {/* Header */}
-            <div className="text-center mb-12">
-              <h1 className="text-6xl font-bold mb-4 animate-text-glow">
+            <div className="text-center mb-8 sm:mb-10 lg:mb-12">
+              <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-2 sm:mb-3 lg:mb-4 animate-text-glow">
                 <span className="text-white">Get in</span>
                 <span className="text-gray-400"> Touch</span>
               </h1>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed px-2">
                 Have questions about mnemonic.fyi? We&apos;d love to hear from you.
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-12 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-start">
               {/* Contact Info */}
-              <div className="space-y-8">
-                <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800">
-                  <h2 className="text-2xl font-semibold mb-6 text-blue-400">Contact Information</h2>
-                  <div className="space-y-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center">
-                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="space-y-6 sm:space-y-8">
+                <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 lg:p-8 border border-gray-800">
+                  <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-4 sm:mb-5 lg:mb-6 text-blue-400">Contact Information</h2>
+                  <div className="space-y-4 sm:space-y-6">
+                    <div className="flex items-center space-x-3 sm:space-x-4">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 rounded-xl flex items-center justify-center">
+                        <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
                       </div>
                       <div>
-                        <h3 className="font-semibold text-white">Email</h3>
-                        <p className="text-gray-400">hello@mnemonic.fyi</p>
+                        <h3 className="font-semibold text-white text-sm sm:text-base">Email</h3>
+                        <p className="text-gray-400 text-sm sm:text-base">hello@mnemonic.fyi</p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-4">
@@ -103,8 +111,8 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800">
-                  <h2 className="text-2xl font-semibold mb-6 text-yellow-400">Why Choose Us?</h2>
+                <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 lg:p-8 border border-gray-800">
+                  <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-4 sm:mb-5 lg:mb-6 text-yellow-400">Why Choose Us?</h2>
                   <ul className="space-y-4">
                     <li className="flex items-start space-x-3">
                       <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
@@ -127,8 +135,8 @@ export default function Contact() {
               </div>
 
               {/* Contact Form */}
-              <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800">
-                <h2 className="text-2xl font-semibold mb-6 text-green-400">Send us a Message</h2>
+              <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 lg:p-8 border border-gray-800">
+                <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-4 sm:mb-5 lg:mb-6 text-green-400">Send us a Message</h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
@@ -193,19 +201,19 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Enhanced Floating elements */}
-          <div className="absolute top-20 left-10 w-2 h-2 bg-white rounded-full opacity-60 animate-pulse animate-float"></div>
-          <div className="absolute top-40 right-20 w-1 h-1 bg-blue-400 rounded-full opacity-40 animate-pulse delay-1000 animate-bounce"></div>
-          <div className="absolute bottom-40 left-20 w-3 h-3 bg-gray-600 rounded-full opacity-30 animate-pulse delay-2000 animate-float"></div>
-          <div className="absolute bottom-20 right-10 w-1 h-1 bg-yellow-400 rounded-full opacity-50 animate-pulse delay-500 animate-bounce"></div>
+          {/* Enhanced Floating elements - Hidden on mobile for performance */}
+          <div className="hidden sm:block absolute top-20 left-10 w-2 h-2 bg-white rounded-full opacity-60 animate-pulse animate-float"></div>
+          <div className="hidden sm:block absolute top-40 right-20 w-1 h-1 bg-blue-400 rounded-full opacity-40 animate-pulse delay-1000 animate-bounce"></div>
+          <div className="hidden sm:block absolute bottom-40 left-20 w-3 h-3 bg-gray-600 rounded-full opacity-30 animate-pulse delay-2000 animate-float"></div>
+          <div className="hidden sm:block absolute bottom-20 right-10 w-1 h-1 bg-yellow-400 rounded-full opacity-50 animate-pulse delay-500 animate-bounce"></div>
         </div>
 
         {/* Footer */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center">
-          <p className="text-gray-500 text-sm mb-2">
+        <div className="absolute bottom-2 sm:bottom-4 lg:bottom-8 left-1/2 transform -translate-x-1/2 text-center px-2 sm:px-4 w-full max-w-xs sm:max-w-none">
+          <p className="text-gray-500 text-xs sm:text-sm mb-1 sm:mb-2 leading-tight">
             Built with Next.js • Powered by OpenAI • Stored in Supabase
           </p>
-          <p className="text-gray-600 text-xs flex items-center justify-center gap-1">
+          <p className="text-gray-600 text-xs flex items-center justify-center gap-1 leading-tight">
             Made with <span className="text-red-500 animate-pulse">❤️</span> by the mnemonic.fyi team
           </p>
         </div>
