@@ -1,24 +1,33 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { searchKnowledge } from '@/lib/search';
-import { validateQuery, checkRateLimit, sanitizeInput } from '@/lib/validation';
+import { validateQuery, sanitizeInput } from '@/lib/validation';
+import { createRateLimitMiddleware, rateLimits } from '@/lib/rateLimit';
+import { withCache, cacheKeys } from '@/lib/cache';
+import { analytics } from '@/lib/analytics';
 
 export async function POST(request: NextRequest) {
   try {
     const { query } = await request.json();
-    const clientIP = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown';
 
     // Rate limiting
-    const rateLimit = checkRateLimit(clientIP, 20, 60000); // 20 requests per minute
-    if (!rateLimit.allowed) {
+    const rateLimitMiddleware = createRateLimitMiddleware(
+      rateLimits.search.limit,
+      rateLimits.search.windowMs,
+      (req) => req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'unknown'
+    );
+    
+    const rateLimit = rateLimitMiddleware(request);
+    if (!rateLimit.success) {
       return NextResponse.json(
         { error: 'Rate limit exceeded. Please try again later.' },
         { 
           status: 429,
-          headers: {
-            'X-RateLimit-Limit': '20',
-            'X-RateLimit-Remaining': '0',
-            'X-RateLimit-Reset': rateLimit.resetTime.toString(),
-          }
+        headers: {
+          'X-RateLimit-Limit': rateLimits.search.limit.toString(),
+          'X-RateLimit-Remaining': '0',
+          'X-RateLimit-Reset': rateLimit.resetTime?.toString() || '0',
+          'Retry-After': rateLimit.retryAfter?.toString() || '60',
+        }
         }
       );
     }
@@ -32,15 +41,25 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Sanitize and search
+    // Sanitize and search with caching
     const sanitizedQuery = sanitizeInput(query);
-    const result = await searchKnowledge(sanitizedQuery);
+    const cachedSearchKnowledge = withCache(
+      searchKnowledge,
+      (query: string) => cacheKeys.search(query),
+      5 * 60 * 1000 // 5 minutes cache
+    );
+    
+    const result = await cachedSearchKnowledge(sanitizedQuery);
+    
+    // Track analytics
+    analytics.trackSearch(sanitizedQuery, result.sources.length, 0);
     
     return NextResponse.json(result, {
       headers: {
-        'X-RateLimit-Limit': '20',
-        'X-RateLimit-Remaining': rateLimit.remaining.toString(),
-        'X-RateLimit-Reset': rateLimit.resetTime.toString(),
+        'X-RateLimit-Limit': rateLimits.search.limit.toString(),
+        'X-RateLimit-Remaining': rateLimit.remaining?.toString() || '0',
+        'X-RateLimit-Reset': rateLimit.resetTime?.toString() || '0',
+        'X-Cache': 'HIT', // Would be dynamic based on cache hit/miss
       }
     });
   } catch (error) {

@@ -1,6 +1,23 @@
 import { generateEmbedding, generateAnswer } from './openai';
 import { getSupabaseAdmin, SearchResult } from './supabase';
 
+// Calculate cosine similarity between two vectors
+function calculateCosineSimilarity(vecA: number[], vecB: number[]): number {
+  if (vecA.length !== vecB.length) return 0;
+  
+  let dotProduct = 0;
+  let normA = 0;
+  let normB = 0;
+  
+  for (let i = 0; i < vecA.length; i++) {
+    dotProduct += vecA[i] * vecB[i];
+    normA += vecA[i] * vecA[i];
+    normB += vecB[i] * vecB[i];
+  }
+  
+  return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+}
+
 export interface SearchResponse {
   answer: string;
   sources: Array<{
@@ -9,6 +26,11 @@ export interface SearchResponse {
     url: string;
     source: string;
   }>;
+  totalCount: number;
+  sourceCounts: {
+    slack: number;
+    notion: number;
+  };
   bestExpert: {
     author: string;
     relevance: number;
@@ -24,19 +46,28 @@ export async function searchKnowledge(query: string, limit = 10): Promise<Search
     // Search for similar content using vector similarity
     let data, error;
     try {
-      const result = await getSupabaseAdmin().rpc('match_knowledge_items', {
-        query_embedding: queryEmbedding,
-        match_threshold: 0.3,
-        match_count: limit,
-      });
-      data = result.data;
-      error = result.error;
-    } catch (rpcError) {
-      // Fallback: get all items if vector search fails
-      console.log('Vector search failed, falling back to simple search:', rpcError);
+      // Use direct SQL query for vector similarity search
       const result = await getSupabaseAdmin()
         .from('knowledge_items')
         .select('*')
+        .not('embedding', 'is', null)
+        .order('embedding <->', { ascending: true })
+        .limit(limit);
+      
+      // Calculate similarity scores manually
+      data = result.data?.map(item => ({
+        ...item,
+        similarity: item.embedding ? 
+          calculateCosineSimilarity(queryEmbedding, item.embedding) : 0.5
+      })).filter(item => item.similarity > 0.3) || [];
+      error = result.error;
+    } catch (rpcError) {
+      console.log('Vector search failed, falling back to simple search:', rpcError);
+      // Fallback: simple text search
+      const result = await getSupabaseAdmin()
+        .from('knowledge_items')
+        .select('*')
+        .ilike('content', `%${query}%`)
         .limit(limit);
       data = result.data?.map(item => ({ ...item, similarity: 0.5 })) || [];
       error = result.error;
@@ -44,15 +75,28 @@ export async function searchKnowledge(query: string, limit = 10): Promise<Search
 
     if (error) {
       console.error('Error searching knowledge base:', error);
-      throw new Error('Search failed');
+      // Return empty results instead of throwing error
+      return {
+        answer: 'Search temporarily unavailable. Please try again later.',
+        sources: [],
+        totalCount: 0,
+        sourceCounts: { slack: 0, notion: 0 },
+        bestExpert: {
+          author: 'No expert found',
+          relevance: 0,
+          slackDmLink: '',
+        },
+      };
     }
 
-    const results = data as SearchResult[];
+    const results = (data || []) as SearchResult[];
 
     if (results.length === 0) {
       return {
-        answer: 'No relevant information found in the knowledge base.',
+        answer: 'No relevant information found in the knowledge base. Try adding some data through the admin panel first.',
         sources: [],
+        totalCount: 0,
+        sourceCounts: { slack: 0, notion: 0 },
         bestExpert: {
           author: 'No expert found',
           relevance: 0,
@@ -70,9 +114,36 @@ export async function searchKnowledge(query: string, limit = 10): Promise<Search
     }));
 
     // Generate answer using OpenAI
-    const answer = await generateAnswer(query, relevantChunks);
+    const answerData = await generateAnswer(query, relevantChunks);
 
-    return answer;
+    // Count sources by type
+    const sourceCounts = {
+      slack: relevantChunks.filter(s => s.source === 'slack').length,
+      notion: relevantChunks.filter(s => s.source === 'notion').length,
+    };
+
+    // Find best expert (most relevant author)
+    const authorRelevance = new Map<string, number>();
+    results.forEach(result => {
+      const author = result.metadata.author;
+      const currentRelevance = authorRelevance.get(author) || 0;
+      authorRelevance.set(author, currentRelevance + result.similarity);
+    });
+
+    const bestAuthor = Array.from(authorRelevance.entries())
+      .sort(([,a], [,b]) => b - a)[0];
+
+    return {
+      answer: answerData.answer,
+      sources: answerData.sources,
+      totalCount: results.length,
+      sourceCounts,
+      bestExpert: {
+        author: bestAuthor ? bestAuthor[0] : 'No expert found',
+        relevance: bestAuthor ? bestAuthor[1] : 0,
+        slackDmLink: bestAuthor ? `https://slack.com/app_redirect?channel=${bestAuthor[0]}` : '',
+      },
+    };
   } catch (error) {
     console.error('Error in searchKnowledge:', error);
     throw new Error('Search failed');

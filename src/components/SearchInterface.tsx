@@ -2,9 +2,10 @@
 
 import { useState, useRef } from 'react';
 import { SearchSkeleton } from './LoadingSkeleton';
-import { useAppKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
+import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import { useSearchHistory } from '@/hooks/useSearchHistory';
 import { SearchHistory } from './SearchHistory';
+import { ErrorAlert } from './ErrorAlert';
 
 interface SearchResult {
   answer: string;
@@ -34,10 +35,10 @@ export function SearchInterface() {
   const focusSearch = () => {
     searchInputRef.current?.focus();
   };
-  useAppKeyboardShortcuts(focusSearch);
+  useKeyboardShortcuts({ onSearch: focusSearch });
 
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSearch = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     if (!query.trim()) return;
 
     setIsLoading(true);
@@ -54,7 +55,8 @@ export function SearchInterface() {
       });
 
       if (!response.ok) {
-        throw new Error('Search failed');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Search failed');
       }
 
       const data = await response.json();
@@ -63,11 +65,22 @@ export function SearchInterface() {
       // Add to search history
       addToHistory(query, data.sources?.length || 0);
     } catch (err) {
-      setError('Failed to search. Please try again.');
+      setError(err instanceof Error ? err.message : 'Failed to search. Please try again.');
       console.error('Search error:', err);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleRetry = () => {
+    setError('');
+    if (query.trim()) {
+      handleSearch();
+    }
+  };
+
+  const handleDismissError = () => {
+    setError('');
   };
 
   return (
@@ -111,9 +124,11 @@ export function SearchInterface() {
 
       {/* Error State */}
       {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4">
-          <p className="text-red-800 text-sm sm:text-base">{error}</p>
-        </div>
+        <ErrorAlert 
+          error={error} 
+          onRetry={handleRetry}
+          onDismiss={handleDismissError}
+        />
       )}
 
       {/* Results */}

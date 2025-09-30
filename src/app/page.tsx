@@ -13,7 +13,8 @@ export default function Home() {
 
   if (!showApp) {
     return (
-      <div className="min-h-screen bg-black text-white">
+      <>
+        <div className="min-h-screen bg-black text-white">
         {/* Hero Section */}
         <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
           {/* Enhanced Background gradient with animation */}
@@ -84,7 +85,7 @@ export default function Home() {
           )}
           
           {/* Main content */}
-          <div className="relative z-10 text-center px-3 sm:px-6 max-w-6xl mx-auto pb-32 sm:pb-0">
+          <div className="relative z-10 text-center px-3 sm:px-6 max-w-6xl mx-auto pb-8">
             {/* Logo */}
             <div className="mb-6 sm:mb-8 lg:mb-12">
               <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-32 lg:h-32 mx-auto mb-4 sm:mb-6 lg:mb-8 relative animate-float">
@@ -181,8 +182,10 @@ export default function Home() {
           <div className="hidden sm:block absolute top-1/3 left-1/3 w-1 h-1 bg-pink-400 rounded-full opacity-50 animate-pulse delay-300 animate-float"></div>
         </div>
 
-        {/* Footer */}
-        <div className="absolute bottom-4 sm:bottom-6 lg:bottom-8 left-1/2 transform -translate-x-1/2 text-center px-2 sm:px-4 w-full max-w-xs sm:max-w-none">
+        </div>
+        
+        {/* Footer - moved outside main container */}
+        <div className="bg-black text-center px-4 py-6 border-t border-gray-800">
           <p className="text-gray-500 text-xs sm:text-sm mb-1 sm:mb-2 leading-tight">
             Built with Next.js • Powered by OpenAI • Stored in Supabase
           </p>
@@ -190,7 +193,7 @@ export default function Home() {
             Made with <span className="text-red-500 animate-pulse">❤️</span> by the mnemonic.fyi team
           </p>
         </div>
-      </div>
+      </>
     );
   }
 

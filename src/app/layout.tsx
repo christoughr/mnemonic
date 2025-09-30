@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@/components/Analytics";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { AuthProvider } from "@/components/AuthProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,11 +43,14 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning={true}
       >
-        <ErrorBoundary>
-          {children}
-        </ErrorBoundary>
-        <Analytics googleAnalyticsId={process.env.NEXT_PUBLIC_GA_ID} />
+        <AuthProvider>
+          <ErrorBoundary>
+            {children}
+          </ErrorBoundary>
+          <Analytics googleAnalyticsId={process.env.NEXT_PUBLIC_GA_ID} />
+        </AuthProvider>
       </body>
     </html>
   );
