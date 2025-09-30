@@ -17,7 +17,7 @@ export interface NotionPage {
   author: string;
 }
 
-export async function fetchNotionPages(_databaseId?: string): Promise<NotionPage[]> {
+export async function fetchNotionPages(): Promise<NotionPage[]> {
   try {
     const pages: NotionPage[] = [];
 
@@ -116,7 +116,7 @@ function extractAuthor(page: any): string {
 }
 
 export async function ingestNotionPages(workspaceId: string, databaseId?: string): Promise<number> {
-  const pages = await fetchNotionPages(databaseId);
+  const pages = await fetchNotionPages();
   let ingestedCount = 0;
 
   for (const page of pages) {

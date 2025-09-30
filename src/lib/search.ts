@@ -1,22 +1,6 @@
-import { generateEmbedding, generateAnswer } from './openai';
+import { generateAnswer } from './openai';
 import { getSupabaseAdmin, SearchResult } from './supabase';
 
-// Calculate cosine similarity between two vectors
-function calculateCosineSimilarity(vecA: number[], vecB: number[]): number {
-  if (vecA.length !== vecB.length) return 0;
-  
-  let dotProduct = 0;
-  let normA = 0;
-  let normB = 0;
-  
-  for (let i = 0; i < vecA.length; i++) {
-    dotProduct += vecA[i] * vecB[i];
-    normA += vecA[i] * vecA[i];
-    normB += vecB[i] * vecB[i];
-  }
-  
-  return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
-}
 
 export interface SearchResponse {
   answer: string;
@@ -40,11 +24,6 @@ export interface SearchResponse {
 
 export async function searchKnowledge(query: string, limit = 10): Promise<SearchResponse> {
   try {
-    // Generate embedding for the query
-    const queryEmbedding = await generateEmbedding(query);
-
-    // Search for similar content using vector similarity
-    let data, error;
     // Use simple text search for now (more reliable)
     const result = await getSupabaseAdmin()
       .from('knowledge_items')
@@ -52,8 +31,8 @@ export async function searchKnowledge(query: string, limit = 10): Promise<Search
       .ilike('content', `%${query}%`)
       .limit(limit);
     
-    data = result.data?.map(item => ({ ...item, similarity: 0.5 })) || [];
-    error = result.error;
+    const data = result.data?.map(item => ({ ...item, similarity: 0.5 })) || [];
+    const error = result.error;
 
     if (error) {
       console.error('Error searching knowledge base:', error);
