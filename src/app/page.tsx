@@ -1,20 +1,35 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { SearchInterface } from '@/components/SearchInterface';
 import { AdminPanel } from '@/components/AdminPanel';
 import { StatsPanel } from '@/components/StatsPanel';
+import { ProductHuntLanding } from '@/components/ProductHuntLanding';
+import { DemoInterface } from '@/components/DemoInterface';
+import { InvestorDashboard } from '@/components/InvestorDashboard';
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<'search' | 'admin' | 'stats'>('search');
+  const [activeTab, setActiveTab] = useState<'search' | 'admin' | 'stats' | 'demo' | 'investor'>('search');
   const [showApp, setShowApp] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
+  // Check for demo parameter
+  React.useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('demo') === 'true') {
+      setShowApp(true);
+      setActiveTab('demo');
+    }
+  }, []);
+
   if (!showApp) {
-    return (
-      <>
-        <div className="min-h-screen bg-black text-white">
+    return <ProductHuntLanding />;
+  }
+
+  return (
+    <>
+      <div className="min-h-screen bg-black text-white">
         {/* Hero Section */}
         <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
           {/* Enhanced Background gradient with animation */}
@@ -233,11 +248,11 @@ export default function Home() {
         </div>
 
         <div className="flex justify-center mb-4 sm:mb-6 lg:mb-8">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-1 w-full max-w-sm sm:max-w-md">
-            <div className="grid grid-cols-3 gap-1">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-1 w-full max-w-2xl">
+            <div className="grid grid-cols-5 gap-1">
               <button
                 onClick={() => setActiveTab('search')}
-                className={`px-2 sm:px-3 lg:px-6 py-2 rounded-md font-medium transition-colors text-xs sm:text-sm lg:text-base ${
+                className={`px-2 sm:px-3 lg:px-4 py-2 rounded-md font-medium transition-colors text-xs sm:text-sm lg:text-base ${
                   activeTab === 'search'
                     ? 'bg-blue-600 text-white'
                     : 'text-gray-600 hover:text-gray-900'
@@ -246,8 +261,18 @@ export default function Home() {
                 Search
               </button>
               <button
+                onClick={() => setActiveTab('demo')}
+                className={`px-2 sm:px-3 lg:px-4 py-2 rounded-md font-medium transition-colors text-xs sm:text-sm lg:text-base ${
+                  activeTab === 'demo'
+                    ? 'bg-blue-600 text-white'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                Demo
+              </button>
+              <button
                 onClick={() => setActiveTab('admin')}
-                className={`px-2 sm:px-3 lg:px-6 py-2 rounded-md font-medium transition-colors text-xs sm:text-sm lg:text-base ${
+                className={`px-2 sm:px-3 lg:px-4 py-2 rounded-md font-medium transition-colors text-xs sm:text-sm lg:text-base ${
                   activeTab === 'admin'
                     ? 'bg-blue-600 text-white'
                     : 'text-gray-600 hover:text-gray-900'
@@ -257,7 +282,7 @@ export default function Home() {
               </button>
               <button
                 onClick={() => setActiveTab('stats')}
-                className={`px-2 sm:px-3 lg:px-6 py-2 rounded-md font-medium transition-colors text-xs sm:text-sm lg:text-base ${
+                className={`px-2 sm:px-3 lg:px-4 py-2 rounded-md font-medium transition-colors text-xs sm:text-sm lg:text-base ${
                   activeTab === 'stats'
                     ? 'bg-blue-600 text-white'
                     : 'text-gray-600 hover:text-gray-900'
@@ -265,14 +290,26 @@ export default function Home() {
               >
                 Stats
               </button>
+              <button
+                onClick={() => setActiveTab('investor')}
+                className={`px-2 sm:px-3 lg:px-4 py-2 rounded-md font-medium transition-colors text-xs sm:text-sm lg:text-base ${
+                  activeTab === 'investor'
+                    ? 'bg-blue-600 text-white'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                Investor
+              </button>
             </div>
           </div>
         </div>
 
         <div className="w-full max-w-4xl mx-auto">
           {activeTab === 'search' && <SearchInterface />}
+          {activeTab === 'demo' && <DemoInterface />}
           {activeTab === 'admin' && <AdminPanel />}
           {activeTab === 'stats' && <StatsPanel />}
+          {activeTab === 'investor' && <InvestorDashboard />}
         </div>
       </div>
     </div>

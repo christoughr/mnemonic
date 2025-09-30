@@ -45,33 +45,15 @@ export async function searchKnowledge(query: string, limit = 10): Promise<Search
 
     // Search for similar content using vector similarity
     let data, error;
-    try {
-      // Use direct SQL query for vector similarity search
-      const result = await getSupabaseAdmin()
-        .from('knowledge_items')
-        .select('*')
-        .not('embedding', 'is', null)
-        .order('embedding <->', { ascending: true })
-        .limit(limit);
-      
-      // Calculate similarity scores manually
-      data = result.data?.map(item => ({
-        ...item,
-        similarity: item.embedding ? 
-          calculateCosineSimilarity(queryEmbedding, item.embedding) : 0.5
-      })).filter(item => item.similarity > 0.3) || [];
-      error = result.error;
-    } catch (rpcError) {
-      console.log('Vector search failed, falling back to simple search:', rpcError);
-      // Fallback: simple text search
-      const result = await getSupabaseAdmin()
-        .from('knowledge_items')
-        .select('*')
-        .ilike('content', `%${query}%`)
-        .limit(limit);
-      data = result.data?.map(item => ({ ...item, similarity: 0.5 })) || [];
-      error = result.error;
-    }
+    // Use simple text search for now (more reliable)
+    const result = await getSupabaseAdmin()
+      .from('knowledge_items')
+      .select('*')
+      .ilike('content', `%${query}%`)
+      .limit(limit);
+    
+    data = result.data?.map(item => ({ ...item, similarity: 0.5 })) || [];
+    error = result.error;
 
     if (error) {
       console.error('Error searching knowledge base:', error);
