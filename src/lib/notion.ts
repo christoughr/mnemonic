@@ -17,7 +17,7 @@ export interface NotionPage {
   author: string;
 }
 
-export async function fetchNotionPages(databaseId?: string): Promise<NotionPage[]> {
+export async function fetchNotionPages(_databaseId?: string): Promise<NotionPage[]> {
   try {
     const pages: NotionPage[] = [];
 
@@ -28,7 +28,7 @@ export async function fetchNotionPages(databaseId?: string): Promise<NotionPage[
         property: 'object',
         value: 'page',
       },
-    } as any);
+    });
 
     for (const page of response.results) {
       if ('properties' in page) {
@@ -38,9 +38,7 @@ export async function fetchNotionPages(databaseId?: string): Promise<NotionPage[
             id: page.id,
             title: extractTitle(page),
             content: pageContent,
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             url: (page as any).url || '',
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             lastEditedTime: (page as any).last_edited_time || new Date().toISOString(),
             author: extractAuthor(page),
           });
@@ -59,7 +57,7 @@ async function extractPageContent(pageId: string): Promise<string> {
   try {
     const response = await notion.blocks.children.list({
       block_id: pageId,
-    } as any);
+    });
 
     let content = '';
     
@@ -76,7 +74,6 @@ async function extractPageContent(pageId: string): Promise<string> {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function extractTextFromBlock(block: any): string {
   if (!block.type) return '';
 
@@ -102,7 +99,6 @@ function extractTextFromBlock(block: any): string {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function extractTitle(page: any): string {
   const titleProperty = Object.values(page.properties).find((prop: any) => 
     prop.type === 'title'
@@ -111,7 +107,6 @@ function extractTitle(page: any): string {
   return titleProperty?.title?.map((text: any) => text.plain_text).join('') || 'Untitled';
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function extractAuthor(page: any): string {
   // Try to get author from created_by or last_edited_by
   const createdBy = page.created_by?.name || page.created_by?.id;

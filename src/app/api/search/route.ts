@@ -5,7 +5,7 @@ import { validateQuery, checkRateLimit, sanitizeInput } from '@/lib/validation';
 export async function POST(request: NextRequest) {
   try {
     const { query } = await request.json();
-    const clientIP = request.ip || request.headers.get('x-forwarded-for') || 'unknown';
+    const clientIP = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown';
 
     // Rate limiting
     const rateLimit = checkRateLimit(clientIP, 20, 60000); // 20 requests per minute

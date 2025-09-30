@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server';
+// Input validation utilities
 
 // Input sanitization and validation utilities
 export function sanitizeInput(input: string): string {
