@@ -84,7 +84,7 @@ export default function Home() {
           )}
           
           {/* Main content */}
-          <div className="relative z-10 text-center px-3 sm:px-6 max-w-6xl mx-auto pb-20 sm:pb-0">
+          <div className="relative z-10 text-center px-3 sm:px-6 max-w-6xl mx-auto pb-32 sm:pb-0">
             {/* Logo */}
             <div className="mb-6 sm:mb-8 lg:mb-12">
               <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-32 lg:h-32 mx-auto mb-4 sm:mb-6 lg:mb-8 relative animate-float">
@@ -128,12 +128,14 @@ export default function Home() {
             </p>
 
             {/* CTA Button */}
-            <button
-              onClick={() => setShowApp(true)}
-              className="bg-white text-black px-6 sm:px-8 lg:px-12 py-2.5 sm:py-3 lg:py-4 rounded-full text-sm sm:text-base lg:text-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-2xl mb-8 sm:mb-12 lg:mb-20"
-            >
-              Try Demo →
-            </button>
+            <div className="mb-8 sm:mb-12 lg:mb-20">
+              <button
+                onClick={() => setShowApp(true)}
+                className="bg-white text-black px-6 sm:px-8 lg:px-12 py-2.5 sm:py-3 lg:py-4 rounded-full text-sm sm:text-base lg:text-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-2xl"
+              >
+                Try Demo →
+              </button>
+            </div>
 
             {/* Features */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto px-2 sm:px-4">
@@ -180,7 +182,7 @@ export default function Home() {
         </div>
 
         {/* Footer */}
-        <div className="absolute bottom-2 sm:bottom-4 lg:bottom-8 left-1/2 transform -translate-x-1/2 text-center px-2 sm:px-4 w-full max-w-xs sm:max-w-none">
+        <div className="absolute bottom-4 sm:bottom-6 lg:bottom-8 left-1/2 transform -translate-x-1/2 text-center px-2 sm:px-4 w-full max-w-xs sm:max-w-none">
           <p className="text-gray-500 text-xs sm:text-sm mb-1 sm:mb-2 leading-tight">
             Built with Next.js • Powered by OpenAI • Stored in Supabase
           </p>

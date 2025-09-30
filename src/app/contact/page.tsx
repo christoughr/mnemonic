@@ -98,7 +98,7 @@ export default function Contact() {
           )}
           
           {/* Main content */}
-          <div className="relative z-10 px-3 sm:px-6 max-w-4xl mx-auto w-full pb-20 sm:pb-0">
+          <div className="relative z-10 px-3 sm:px-6 max-w-4xl mx-auto w-full pb-32 sm:pb-0">
             {/* Header */}
             <div className="text-center mb-6 sm:mb-8 lg:mb-12">
               <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-3 sm:mb-4 lg:mb-6 animate-text-glow">
@@ -233,7 +233,7 @@ export default function Contact() {
             </div>
 
             {/* CTA */}
-            <div className="text-center mt-16">
+            <div className="text-center mt-16 mb-8 sm:mb-12 lg:mb-16">
               <button
                 onClick={() => setShowApp(true)}
                 className="bg-white text-black px-12 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-2xl animate-shimmer"
@@ -251,7 +251,7 @@ export default function Contact() {
         </div>
 
         {/* Footer */}
-        <div className="absolute bottom-2 sm:bottom-4 lg:bottom-8 left-1/2 transform -translate-x-1/2 text-center px-2 sm:px-4 w-full max-w-xs sm:max-w-none">
+        <div className="absolute bottom-4 sm:bottom-6 lg:bottom-8 left-1/2 transform -translate-x-1/2 text-center px-2 sm:px-4 w-full max-w-xs sm:max-w-none">
           <p className="text-gray-500 text-xs sm:text-sm mb-1 sm:mb-2 leading-tight">
             Built with Next.js • Powered by OpenAI • Stored in Supabase
           </p>
