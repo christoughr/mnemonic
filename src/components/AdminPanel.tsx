@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { AdminSkeleton } from './LoadingSkeleton';
 
 interface SlackChannel {
   id: string;
@@ -103,6 +104,10 @@ export function AdminPanel() {
       setIsLoading(false);
     }
   };
+
+  if (isLoading && !message) {
+    return <AdminSkeleton />;
+  }
 
   return (
     <div className="space-y-6 sm:space-y-8">

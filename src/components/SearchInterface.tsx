@@ -1,6 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { SearchSkeleton } from './LoadingSkeleton';
+import { useAppKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
+import { useSearchHistory } from '@/hooks/useSearchHistory';
+import { SearchHistory } from './SearchHistory';
 
 interface SearchResult {
   answer: string;
@@ -22,6 +26,15 @@ export function SearchInterface() {
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<SearchResult | null>(null);
   const [error, setError] = useState('');
+  const [showHistory, setShowHistory] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const { addToHistory } = useSearchHistory();
+
+  // Keyboard shortcuts
+  const focusSearch = () => {
+    searchInputRef.current?.focus();
+  };
+  useAppKeyboardShortcuts(focusSearch);
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,6 +59,9 @@ export function SearchInterface() {
 
       const data = await response.json();
       setResult(data);
+      
+      // Add to search history
+      addToHistory(query, data.sources?.length || 0);
     } catch (err) {
       setError('Failed to search. Please try again.');
       console.error('Search error:', err);
@@ -60,10 +76,13 @@ export function SearchInterface() {
       <form onSubmit={handleSearch} className="space-y-3 sm:space-y-4">
         <div className="relative">
           <input
+            ref={searchInputRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Ask anything about your team's knowledge..."
+            onFocus={() => setShowHistory(true)}
+            onBlur={() => setTimeout(() => setShowHistory(false), 200)}
+            placeholder="Ask anything about your team's knowledge... (⌘K to focus)"
             className="w-full px-3 sm:px-4 py-2 sm:py-3 pr-24 sm:pr-28 text-base sm:text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             disabled={isLoading}
           />
@@ -74,16 +93,21 @@ export function SearchInterface() {
           >
             {isLoading ? 'Searching...' : 'Search'}
           </button>
+          
+          {/* Search History Dropdown */}
+          <SearchHistory
+            onSelectQuery={(selectedQuery) => {
+              setQuery(selectedQuery);
+              setShowHistory(false);
+            }}
+            isOpen={showHistory && !isLoading}
+            onClose={() => setShowHistory(false)}
+          />
         </div>
       </form>
 
       {/* Loading State */}
-      {isLoading && (
-        <div className="flex items-center justify-center py-6 sm:py-8">
-          <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-blue-600"></div>
-          <span className="ml-2 sm:ml-3 text-gray-600 text-sm sm:text-base">Searching your knowledge base...</span>
-        </div>
-      )}
+      {isLoading && <SearchSkeleton />}
 
       {/* Error State */}
       {error && (

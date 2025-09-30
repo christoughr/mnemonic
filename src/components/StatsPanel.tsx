@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { StatsSkeleton } from './LoadingSkeleton';
 
 interface KnowledgeStats {
   totalItems: number;
@@ -40,12 +41,7 @@ export function StatsPanel() {
   };
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center py-8 sm:py-12">
-        <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-blue-600"></div>
-        <span className="ml-2 sm:ml-3 text-gray-600 text-sm sm:text-base">Loading stats...</span>
-      </div>
-    );
+    return <StatsSkeleton />;
   }
 
   if (error) {
